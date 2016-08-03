@@ -38,7 +38,7 @@ Agora, vamos la! Execute um dos seguintes procedimentos:
 
 - Criar um vhost em seu servidor web que aponta o DocumentRoot para o
   `public/` diretório do projeto
-- Fogo até o built-in servidor web em PHP (5.4.8+) (** Nota **: não use isso para Produção!)
+- Vá até o built-in servidor web em PHP (5.4.8+) (**Nota**: não use isso para Produção!)
 
 Neste último caso, faça o seguinte:
 
@@ -72,7 +72,7 @@ Esta mudança terá de ser feita no ficheiro vHost do seu servidor (não pode se
 
 ### NOTA SOBRE OPCACHE
 
-** Desative todos os caches opcode ao executar o administrador! **
+**desative todos os caches opcode ao executar o administrador!**
 
 O administrador não pode e não será executado corretamente quando um opcode cache, 
 tais como APC ou OpCache, está habilitado. Apigility não usa um banco de dados para armazenar a configuração;
