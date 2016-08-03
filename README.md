@@ -36,11 +36,6 @@ php public/index.php development enable # colocar a api no modo de desenvolvimen
 
 Agora, vamos la! Execute um dos seguintes procedimentos:
 
-- Create a vhost in your web server that points the DocumentRoot to the
-  `public/` directory of the project
-- Fire up the built-in web server in PHP (5.4.8+) (**note**: do not use this for
-  production!)
-
 - Criar um vhost em seu servidor web que aponta o DocumentRoot para o
   `public/` diretório do projeto
 - Fogo até o built-in servidor web em PHP (5.4.8+) (** Nota **: não use isso para Produção!)
