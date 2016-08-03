@@ -14,7 +14,7 @@ Instalação
 Em primeiro lugar, clonar o repositório:
 
 ```bash
-git clone https://github.com/joaopaulopvillela/api-ionic.git 
+git clone https://github.com/joaopaulopvillela/api-meusconvidados.git
 cd path/to/install
 ```
 
