@@ -1,201 +1,111 @@
-Apigility Skeleton Application
+API de comunicação do o Aplicativo de Meus convidados
 ==============================
 
-Requirements
+Requisitos
 ------------
 
-Please see the [composer.json](composer.json) file.
+Por favor, consulte o arquivo [composer.json] (composer.json).
 
-Installation
-------------
-
-### Via release tarball
-
-Grab the latest release via the [Apigility website](http://apigility.org/)
-and/or the [releases page](https://github.com/zfcampus/zf-apigility-skeleton/releases); each release
-has distribution tarballs and zipballs available.
-
-Untar it:
-
-```bash
-tar xzf zf-apigility-skeleton-{version}.tgz
-```
-
-(Where `{version}` is the version you downloaded.)
-
-Or unzip, if you chose the zipball:
-
-```bash
-unzip zf-apigility-skeleton-{version}.zip
-```
-
-(Where `{version}` is the version you downloaded.)
-
-### Via Composer (create-project)
-
-You can use the `create-project` command from [Composer](http://getcomposer.org/)
-to create the project in one go (you need to install [composer.phar](https://getcomposer.org/doc/00-intro.md#downloading-the-composer-executable)):
-
-```bash
-curl -s https://getcomposer.org/installer | php --
-php composer.phar create-project -sdev zfcampus/zf-apigility-skeleton path/to/install
-```
+Instalação
+-----------
 
 ### Via Git (clone)
 
-First, clone the repository:
+Em primeiro lugar, clonar o repositório:
 
 ```bash
-git clone https://github.com/zfcampus/zf-apigility-skeleton.git # optionally, specify the directory in which to clone
+git clone https://github.com/joaopaulopvillela/api-ionic.git 
 cd path/to/install
 ```
 
-At this point, you need to use [Composer](https://getcomposer.org/) to install
-dependencies. Assuming you already have Composer:
+Neste ponto, você precisa usar [Composer] (https://getcomposer.org/) para instalar
+dependências. Supondo que você já tem Compositor:
 
 ```bash
 composer.phar install
 ```
 
-### All methods
+### Todos os métodos
 
-Once you have the basic installation, you need to put it in development mode:
+Depois de ter a instalação básica, você precisa colocá-lo no modo de desenvolvimento:
 
 ```bash
 cd path/to/install
-php public/index.php development enable # put the skeleton in development mode
+php public/index.php development enable # colocar a api no modo de desenvolvimento
 ```
 
-Now, fire it up! Do one of the following:
+Agora, vamos la! Execute um dos seguintes procedimentos:
 
 - Create a vhost in your web server that points the DocumentRoot to the
   `public/` directory of the project
 - Fire up the built-in web server in PHP (5.4.8+) (**note**: do not use this for
   production!)
 
-In the latter case, do the following:
+- Criar um vhost em seu servidor web que aponta o DocumentRoot para o
+  `public/` diretório do projeto
+- Fogo até o built-in servidor web em PHP (5.4.8+) (** Nota **: não use isso para Produção!)
+
+Neste último caso, faça o seguinte:
 
 ```bash
 cd path/to/install
 php -S 0.0.0.0:8080 -ddisplay_errors=0 -t public public/index.php
 ```
 
-You can then visit the site at http://localhost:8080/ - which will bring up a
-welcome page and the ability to visit the dashboard in order to create and
-inspect your APIs.
+Em seguida, pode visitar o site em http://localhost:8080/ - o que fará com que 
+uma página de boas-vindas e a possibilidade de visitar o painel de instrumentos, 
+a fim de criar e inspecionar suas APIs.
 
-### NOTE ABOUT USING THE PHP BUILT-IN WEB SERVER
+### NOTA sobre como usar o PHP Built-in servidor WEB
 
-PHP's built-in web server did not start supporting the `PATCH` HTTP method until
-5.4.8. Since the admin API makes use of this HTTP method, you must use a version
-&gt;= 5.4.8 when using the built-in web server.
+servidor web embutido do PHP não começar a apoiar o método `HTTP PATCH` até 5.4.8. 
+Uma vez que a API de administração faz uso deste método HTTP, você deve usar uma 
+versão &gt;= 5.4.8 quando utilizar o servidor web embutido.
 
-### NOTE ABOUT USING APACHE
+### NOTA USANDO APACHE
 
-Apache forbids the character sequences `%2F` and `%5C` in URI paths. However, the Apigility Admin
-API uses these characters for a number of service endpoints. As such, if you wish to use the
-Admin UI and/or Admin API with Apache, you will need to configure your Apache vhost/project to
-allow encoded slashes:
+Apache proíbe a sequências de caracteres `%2F` e`%5C` em caminhos URI. No entanto, 
+a API Apigility administrador utiliza estes caracteres para um número de terminais de 
+serviços. Como tal, se você quiser usar a interface do usuário do administrador e/ou API 
+administrador com o Apache, você precisará configurar o Apache vhost / projeto para permitir barras codificadas:
 
 ```apache
 AllowEncodedSlashes On
 ```
 
-This change will need to be made in your server's vhost file (it cannot be added to `.htaccess`).
+Esta mudança terá de ser feita no ficheiro vHost do seu servidor (não pode ser adicionado ao `.htaccess`).
 
-### NOTE ABOUT OPCACHE
+### NOTA SOBRE OPCACHE
 
-**Disable all opcode caches when running the admin!**
+** Desative todos os caches opcode ao executar o administrador! **
 
-The admin cannot and will not run correctly when an opcode cache, such as APC or
-OpCache, is enabled. Apigility does not use a database to store configuration;
-instead, it uses PHP configuration files. Opcode caches will cache these files
-on first load, leading to inconsistencies as you write to them, and will
-typically lead to a state where the admin API and code become unusable.
+O administrador não pode e não será executado corretamente quando um opcode cache, 
+tais como APC ou OpCache, está habilitado. Apigility não usa um banco de dados para armazenar a configuração;
+em vez disso, ele usa arquivos de configuração do PHP. caches opcode irá armazenar 
+em cache esses arquivos em primeira carga, levando a inconsistências como você escrever 
+para eles, e normalmente irá levar a um estado em que a API de administração e código de ficar inutilizado.
 
-The admin is a **development** tool, and intended for use a development
-environment. As such, you should likely disable opcode caching, regardless.
+O administrador é um **development** ferramenta, e destinado a ser utilizado um ambiente de desenvolvimento. 
+Como tal, você provavelmente deve desabilitar o cache opcode, independentemente.
 
-When you are ready to deploy your API to **production**, however, you can
-disable development mode, thus disabling the admin interface, and safely run an
-opcode cache again. Doing so is recommended for production due to the tremendous
-performance benefits opcode caches provide.
+Quando estiver pronto para implantar seu API para a **production**, no entanto, você 
+pode desativar o modo de desenvolvimento, impossibilitando assim a interface de administração, 
+e executar com segurança um opcode cache novamente. Se o fizer, é recomendado para a produção
+devido aos benefícios de desempenho enormes caches opcode fornecem.
 
-### NOTE ABOUT DISPLAY_ERRORS
+### NOTA SOBRE display_errors
 
-The `display_errors` `php.ini` setting is useful in development to understand what warnings,
-notices, and error conditions are affecting your application. However, they cause problems for APIs:
-APIs are typically a specific serialization format, and error reporting is usually in either plain
-text, or, with extensions like XDebug, in HTML. This breaks the response payload, making it unusable
-by clients.
+A configuração `display_errors` no `php.ini` é útil no desenvolvimento de entender o que as 
+advertências, avisos e condições de erro estão afetando sua aplicação. No entanto, eles causar problemas para APIs:
+APIs são tipicamente um formato de serialização específico e relatório de erros é geralmente ou 
+em texto simples, ou, com extensões como XDebug, em HTML. Isso quebra a carga de resposta, 
+tornando-o inutilizável pelos clientes.
 
-For this reason, we recommend disabling `display_errors` when using the Apigility admin interface.
-This can be done using the `-ddisplay_errors=0` flag when using the built-in PHP web server, or you
-can set it in your virtual host or server definition. If you disable it, make sure you have
-reasonable error log settings in place. For the built-in PHP web server, errors will be reported in
-the console itself; otherwise, ensure you have an error log file specified in your configuration.
+Por este motivo, recomendamos desativar `display_errors` ao usar a interface Apigility administrador.
+Isso pode ser feito usando o `-ddisplay_errors = 0` bandeira ao usar o built-in PHP servidor web, 
+ou você pode configurá-lo em sua definição de host ou servidor virtual. Se você desativá-lo, verifique 
+se você tem as configurações de log de erro razoáveis ​​no lugar. Para o servidor web PHP built-in, os 
+erros serão relatados no console em si; de outra forma, garantir que você tenha um arquivo de log de erro 
+especificado na sua configuração.
 
-`display_errors` should *never* be enabled in production, regardless.
-
-### Vagrant
-
-If you prefer to develop with Vagrant, there is a basic vagrant recipe included with this project.
-
-This recipe assumes that you already have Vagrant installed. The virtual machine will try to use localhost:8080 by
-default, so if you already have a server on this port of your host machine, you need to shut down the conflicting
-server first, or if you know how, you can reconfigure the ports in Vagrantfile.
-
-Assuming you have Vagrant installed and assuming you have no port conflicts, you can bring up the Vagrant machine
-with the standard `up` command:
-
-```
-vagrant up
-```
-
-When the machine comes up, you can ssh to it with the standard ssh forward agent:
-
-```
-vagrant ssh
-```
-
-The web root is inside the shared directory, which is at `/vagrant`. Once you've ssh'd into the box, you need to cd:
-
-```
-cd /vagrant
-```
-
-For vagrant documentation, please refer to [vagrantup.com](https://www.vagrantup.com/)
-
-### Docker
-
-If you develop or deploy using Docker, we provide both development and production configuration for
-you.
-
-#### Development
-
-Prepare your development environment using [docker compose](https://docs.docker.com/compose/install/):
-```bash
-git clone https://github.com/zfcampus/zf-apigility-skeleton
-
-cd zf-apigility-skeleton
-
-docker-compose build
-```
-
-Start the development environment:
-```bash
-docker-compose up
-```
-Access your editor from `http://localhost:8080/` or `http://<boot2docker ip>:8080/` if on Windows or Mac.
-
-#### Production
-
-Use the included [Dockerfile](https://docs.docker.com/reference/builder/) to build an [Apache](http://httpd.apache.org/) container:
-```bash
-docker build -t apighost .
-```
-
-Test your container:
-```bash
-docker run -it -p "80:80" apighost
-```
+`display_errors` deve *nunca* estar habilitado produção, independentemente.
